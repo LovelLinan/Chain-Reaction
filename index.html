@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<head>
+	<link href="layout.css" rel="stylesheet" type="text/css"/>
+</head>
+
+
+<body background="keydarker.png">
+
+<center>
+	
+
+<div class="chain"> Chain Reaction</div>
+
+
+<table align="center" class="table">
+	<tr> 
+		<td class="font1" onclick="block1()" id="1"  >
+			
+		</td>
+	
+		<td class="font1" id="2" onclick="block2()">
+			
+		</td>
+		<td class="font1" id="3" onclick="block3()">
+			
+		</td>
+		<td class="font1" id="4" onclick="block4()">
+	
+		</td>
+	</tr>
+
+	<tr>
+		<td class="font1" id="5" onclick="block5()">
+			
+		</td>
+		<td class="font1" id="6" onclick="block6()">
+		
+		</td>
+		<td class="font1" id="7" onclick="block7()">
+		
+		</td>
+		<td class="font1" id="8" onclick="block8()">
+		
+		</td>
+	</tr>
+
+	<tr>
+		<td class="font1" id="9" onclick="block9()">
+		
+		</td>
+		<td class="font1" id="10" onclick="block10()">
+			
+		</td>
+		<td class="font1" id="11" onclick="block11()">
+		
+		</td>
+		<td class="font1"  id="12" onclick="block12()">
+			
+		</td>
+	</tr>
+
+	<tr>
+		<td class="font1" id="13" onclick="block13()">
+			
+		</td>
+		<td class="font1" id="14" onclick="block14()">
+			
+		</td>
+		<td class="font1" id="15" onclick="block15()">
+		
+		</td>
+		<td class="font1" id="16" onclick="block16()">
+		
+		</td>
+	</tr>
+
+</table>
+
+
+
+<div id="player" ></div>
+	
+
+
+	
+</div>
+
+
+
+
+
+<br>
+
+</body>
+
+
+<script type="text/javascript">
+
+
+
+
+var solves=0;
+var player1=0;
+var player2=0;
+var winner=0;
+var count=0,same=0,num=0;
+var hold=0;
+var player=1;
+var r1=0,c1=0;
+var td=0;
+var name="";
+var name2="";
+var arr = [
+        	[5, 5, 5, 5, 5, 5],
+            [5, 0, 0, 0, 0, 5],
+            [5, 0, 0, 0, 0, 5],
+            [5, 0, 0, 0, 0, 5],
+            [5, 0, 0, 0, 0, 5],   
+            [5, 5, 5, 5, 5, 5],
+       	   ];	
+
+var arr2 = [
+        	[5, 5, 5, 5, 5, 5],
+            [5, 0, 0, 0, 0, 5],
+            [5, 0, 0, 0, 0, 5],
+            [5, 0, 0, 0, 0, 5],
+            [5, 0, 0, 0, 0, 5],   
+            [5, 5, 5, 5, 5, 5],
+       	   ];
+
+
+if(player%2==0){
+	player=2;//this is the part where the player is selected using modulo operation method
+	document.getElementById("player").innerHTML="<div class=\"player1\" >Player 2 turn!</div>";
+
+}
+else{
+	player=1;	
+	document.getElementById("player").innerHTML="<div class=\"player1\">Player 1 turn!</div>";
+}
+	
+
+
+
+for(var i=1; i<=16; i++){//this is the loop where the input value is calld
+	document.getElementById(i.toString()).innerHTML="<span></span>";
+}
+
+
+
+ 
+//this is function where all the onlick button call
+function block1(){
+	window.addEventListener("DOMContentLoaded", event => {
+  const audio = document.querySelector("audio");
+  audio.volume = 1;
+  audio.play();
+})
+r1=1;
+c1=1;
+solve();//call 
+
+}//block
+
+function block2(){
+
+r1=1;
+c1=2;
+
+solve();
+}//block
+
+function block3(){
+
+r1=1;
+c1=3;
+
+solve();
+}//block
+
+function block4(){
+
+r1=1;
+c1=4;
+solve();
+}//block
+
+function block5(){
+
+r1=2;
+c1=1;
+
+solve();
+
+}//block
+function block6(){
+
+r1=2;
+c1=2;
+
+solve();
+
+}//block
+function block7(){
+
+r1=2;
+c1=3;
+
+solve();
+
+}//block
+function block8(){
+
+r1=2;
+c1=4;
+
+solve();
+
+}//block
+function block9(){
+
+r1=3;
+c1=1;
+
+solve();
+
+}//block
+function block10(){
+
+r1=3;
+c1=2;
+
+solve();
+
+}//block
+function block11(){
+
+r1=3;
+c1=3;
+
+solve();
+
+}//block
+function block12(){
+
+r1=3;
+c1=4;
+
+solve();
+
+}//block
+
+function block13(){
+
+r1=4;
+c1=1;
+
+solve();
+
+}//block
+function block14(){
+
+r1=4;
+c1=2;
+
+solve();
+
+}//block
+function block15(){
+
+r1=4;
+c1=3;
+
+solve();
+
+}//block
+function block16(){
+
+r1=4;
+c1=4;
+
+solve();
+
+}//block
+
+function solve(){
+
+	for(var r=1; r<=4; r++){
+		for(var c=1; c<=4; c++){
+
+			if(r1==r&&c1==c){
+				if(arr2[r][c]==0){
+					arr2[r][c]=player;
+					arr[r1][c1]++;
+					solves++;
+					break;				
+				}//if
+				else if(arr2[r][c]==player){
+					arr[r1][c1]++;
+					solves++;
+					break;
+				}//else if
+			}
+		}	
+	}//locate
+      			
+ 	if(solves>=1){
+  		winner++;
+		for(var x=0; x<12; x++){
+			for(var r=1; r<=4; r++){
+				for(var c=1; c<=4; c++){
+
+        			if((r==1||r==4)&&(c==1||c==4)){
+        				if(arr[r][c]==2){
+        					add0();    					
+        				}
+        				if(arr[r][c]==3){
+        					add1();  					
+        				}	
+
+        			} //corner
+
+        			if( ((r==1||r==4)&&(c==2||c==3)) || ((r==2||r==3)&&(c==1||c==4)) ){ 
+        				if(arr[r][c]==3){
+        					add0();  
+        				}
+        				if(arr[r][c]==4){
+        					add1();
+        				}
+        				if(arr[r][c]==5){
+        					add2();
+        				}
+        			}		//edge       			
+        			
+        			if((r==2||r==3)&&(c==2||c==3)){
+        				if(arr[r][c]==4){
+        					add0();  
+        				}
+        				if(arr[r][c]==5){
+        					add1();
+        				}
+        				if(arr[r][c]==6){
+        					add2();       					
+        				}
+        				if(arr[r][c]==7){        					
+        					add3();
+        				}     				
+        			}//center.      						
+
+			}//c
+		}//r
+	}//solution
+
+	for(var r=1; r<=4; r++){//this array is for the display
+		for(var c=1; c<=4; c++){
+			num++; 
+			
+			if(arr2[r][c]==1){
+				player1++;
+					
+					if(((r==1||r==4)&&(c==2||c==3)||(r==2||r==3)&&(c==1||c==4))&&arr[r][c]==2){
+						document.getElementById((num).toString()).innerHTML="<span style=\"background-image: url('aplayer3.png');\" ></span>";
+					}
+					else if(((r==1||r==4)&&(c==1||c==4))&&arr[r][c]==1){
+						document.getElementById((num).toString()).innerHTML="<span style=\"background-image: url('aplayer3.png');\" ></span>";
+					}
+					else{
+						document.getElementById((num).toString()).innerHTML="<span style=\"background-image: url('aplayer"+(arr[r][c]).toString()+".png');\" >"+"</span>";
+					}					
+				}
+
+				else if(arr2[r][c]==2){
+					player2++;
+
+
+					if(((r==1||r==4)&&(c==2||c==3)||(r==2||r==3)&&(c==1||c==4))&&arr[r][c]==2){
+						document.getElementById((num).toString()).innerHTML="<span style=\"background-image: url('bplayer3.png');\" ></span>";
+					}
+					else if(((r==1||r==4)&&(c==1||c==4))&&arr[r][c]==1){
+						document.getElementById((num).toString()).innerHTML="<span style=\"background-image: url('bplayer3.png');\" ></span>";
+					}
+					else{
+
+						document.getElementById((num).toString()).innerHTML="<span style=\"background-image: url('bplayer"+(arr[r][c]).toString()+".png');\" >"+"</span>";
+					}
+
+				}
+
+				else{
+					document.getElementById((num).toString()).innerHTML="<span >"+" "+"</span>";	
+				}
+
+		}//c
+	}//output
+	
+	num=0;
+
+	player++;
+	if(player%2==0){
+		player=2;
+		document.getElementById("player").innerHTML="<div class=\"player2\">Player 2 turn!</div>";
+	}
+	else{
+		player=1;	
+		document.getElementById("player").innerHTML="<div class=\"player1\">Player 1 turn!</div>";
+	} 
+
+	if(winner>=3){
+
+		if(player1==0||player2==0){
+			if(player1==0){
+				
+				document.getElementById("player").innerHTML="<div class=\"glow\" style=\"color: red\">Player 2 is the winnner!</div>";			
+		}//p1
+
+		if(player2==0){
+		
+			document.getElementById("player").innerHTML="<div class=\"glow\" >Player 1 is the winnner!</div>";
+		}
+
+		for(var r=1; r<=4; r++){
+			for(var c=1; c<=4; c++){
+				arr2=player;
+				}
+			}
+
+		}
+	}//winner
+
+
+
+
+function add0(){//this function is for the process of solution
+								arr[r][c]=0;	
+        						arr2[r][c]=0;
+        											
+        						arr[r+1][c]++;	  	
+        						arr2[r+1][c]=player;
+        											
+        						arr[r-1][c]++;
+        						arr2[r-1][c]=player;
+        					
+        						arr[r][c+1]++;
+        						arr2[r][c+1]=player;
+        								
+        						arr[r][c-1]++;	
+        						arr2[r][c-1]=player;
+
+
+
+}
+
+function add1(){
+								arr[r][c]=1;	
+        						arr2[r][c]=player;
+        											
+        						arr[r+1][c]++;	  	
+        						arr2[r+1][c]=player;
+        											
+        						arr[r-1][c]++;
+        						arr2[r-1][c]=player;
+        					
+        						arr[r][c+1]++;
+        						arr2[r][c+1]=player;
+        								
+        						arr[r][c-1]++;	
+        						arr2[r][c-1]=player;
+
+
+}
+
+function add2(){
+								arr[r][c]=2;	
+        						arr2[r][c]=player;
+        											
+        						arr[r+1][c]++;	  	
+        						arr2[r+1][c]=player;
+        											
+        						arr[r-1][c]++;
+        						arr2[r-1][c]=player;
+        					
+        						arr[r][c+1]++;
+        						arr2[r][c+1]=player;
+        								
+        						arr[r][c-1]++;	
+        						arr2[r][c-1]=player;
+
+}
+function add3(){
+								arr[r][c]=3;	
+        						arr2[r][c]=player;
+        											
+        						arr[r+1][c]++;	  	
+        						arr2[r+1][c]=player;
+        											
+        						arr[r-1][c]++;
+        						arr2[r-1][c]=player;
+        					
+        						arr[r][c+1]++;
+        						arr2[r][c+1]=player;
+        								
+        						arr[r][c-1]++;	
+        						arr2[r][c-1]=player;
+
+}
+
+}//subsolve
+player1=0;
+player2=0;
+
+
+solves=0;
+}//mainsolve
+
+
+
+
+
+
+</script>
+
+
+</html>
